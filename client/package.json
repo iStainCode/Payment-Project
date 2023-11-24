@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@headlessui/tailwindcss": "^0.2.0",
+    "@szhsin/react-menu": "^4.1.0",
     "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
     "js-cookie": "^3.0.5",

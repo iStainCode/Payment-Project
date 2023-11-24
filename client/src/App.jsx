@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import RegisterPage from "./pages/registerPage";
 import LoginPage from "./pages/LoginPage";
-import Debts from "./pages/Debts";
+import AdMainDashboard from "./pages/admin/AdMain";
+import LayoutAdmin from "./layouts/LayoutAdmin";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -16,7 +17,9 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/debts" element={<Debts />} />
+            <Route path="/dashboard" element={<LayoutAdmin />}>
+              <Route index element={<AdMainDashboard />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
