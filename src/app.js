@@ -4,9 +4,10 @@ import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
 import debtsRoutes from "./routes/debts.routes.js";
+import productsRouter from './routes/products.routes.js'
 
 const app = express();
-//para que se pueda comunicar el frond con el back
+//para que se pueda comunicar el front con el back
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -23,5 +24,7 @@ app.use(cookieParser());
 app.use("/api", authRoutes);
 //las rutas de deudas
 app.use("/api", debtsRoutes);
+//las rutas de los productos
+app.use('/api',productsRouter)
 
 export default app;

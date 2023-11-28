@@ -10,6 +10,7 @@ import {
   RiArrowRightSLine,
   RiMenu3Line,
   RiCloseLine,
+  RiBox3Fill
 } from "react-icons/ri";
 
 const Sidebar = () => {
@@ -29,10 +30,18 @@ const Sidebar = () => {
           <ul>
             <li>
               <Link
-                to="/"
+                to="/dashboard"
                 className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors"
               >
-                <RiBarChart2Line className="text-primary" /> Analíticas
+                <RiBarChart2Line className="text-primary" /> Panel principal
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/products"
+                className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors"
+              >
+                <RiBox3Fill className="text-primary" /> Productos
               </Link>
             </li>
             <li>

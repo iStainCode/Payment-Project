@@ -1,8 +1,10 @@
 import React from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 
 const loginImg =
   "https://images.unsplash.com/photo-1586380951230-e6703d9f6833?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -14,7 +16,13 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  const { singIn, errors: loginErrors } = useAuth();
+  const { singIn, isAuthenticated, errors: loginErrors } = useAuth();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/dashboard");
+  }, [isAuthenticated]);
 
   const onSubmit = handleSubmit((data) => {
     singIn(data);

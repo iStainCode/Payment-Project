@@ -21,7 +21,7 @@ function RegisterPage() {
   const navigate = useNavigate();
   //usa el useEffect para validad si el estado de isAuthenticated es true y si es lo redirige a "/dasboard-A"
   useEffect(() => {
-    if (isAuthenticated) navigate("/dashboard-A");
+    if (isAuthenticated) navigate("/dashboard");
   }, [isAuthenticated]);
   //resive los valores de cuando se envian del formulario y los guarda el singUp que es el objeto usuario
   const onSubmit = handleSubmit(async (values) => {

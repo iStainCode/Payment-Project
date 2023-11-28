@@ -7,22 +7,27 @@ import AdMainDashboard from "./pages/admin/AdMain";
 import LayoutAdmin from "./layouts/LayoutAdmin";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
+import AdProducts from "./pages/admin/AdProducts";
+import { ProductProvider } from "./context/ProductContext";
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<LayoutAdmin />}>
-              <Route index element={<AdMainDashboard />} />
+      <ProductProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<LayoutAdmin />}>
+                <Route index element={<AdMainDashboard />} />
+                <Route path="/dashboard/products" element={<AdProducts />} />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </ProductProvider>
     </AuthProvider>
   );
 }

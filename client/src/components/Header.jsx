@@ -11,8 +11,10 @@ import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Header = () => {
+  const { isAuthenticated, logout, user } = useAuth();
   return (
     <header className="h-[7vh] md:h-[10vh] border-b border-secondary-100 p-8 flex items-center justify-end">
       <nav className="flex items-center gap-2">
@@ -46,7 +48,7 @@ const Header = () => {
               />
               <div className="text-sm flex flex-col">
                 <div className="flex items-center justify-between gap-4">
-                  <span>Jorge Luis Trejo</span>{" "}
+                  <span>marciano</span>{" "}
                   <span className="text-[8px]">21/10/2022</span>
                 </div>
                 <p className="text-gray-500 text-xs">
@@ -106,7 +108,7 @@ const Header = () => {
                 src="https://img.freepik.com/foto-gratis/feliz-optimista-guapo-gerente-ventas-latina-apuntando-lado-mirando-camara_1262-12679.jpg"
                 className="w-6 h-6 object-cover rounded-full"
               />
-              <span>Jorge Luis Trejo</span>
+              <span>{user.username}</span>
               <RiArrowDownSLine />
             </MenuButton>
           }
@@ -126,8 +128,8 @@ const Header = () => {
                 className="w-8 h-8 object-cover rounded-full"
               />
               <div className="flex flex-col text-sm">
-                <span className="text-sm">Jorge Luis Trejo</span>
-                <span className="text-xs text-gray-500">jorge@gmail.com</span>
+                <span className="text-sm">{user.username}</span>
+                <span className="text-xs text-gray-500">{user.email}</span>
               </div>
             </Link>
           </MenuItem>
