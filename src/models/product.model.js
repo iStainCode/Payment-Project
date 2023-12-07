@@ -4,23 +4,33 @@ const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     price: {
       type: mongoose.Types.Decimal128,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     stock: {
       type: Number,
-      require: true,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
     },
     active: {
       type: Boolean,
       default: false,
+    },
+    image1: {
+      type: String
+    },
+    image2: {
+      type: String
     },
   },
   {

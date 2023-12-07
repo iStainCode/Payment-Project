@@ -55,7 +55,7 @@ function RegisterPage() {
           //al enviar el form se va a ejecutar la funcion onSubmit
           onSubmit={onSubmit}
           className="mx-auto mb-0 mt-8 max-w-md space-y-4"
-        >
+        > {console.log(registerErrors)}
           {registerErrors.map((error, i) => (
             <motion.div
               className="bg-red-600 text-white p-2 w-full rounded-lg text-center"

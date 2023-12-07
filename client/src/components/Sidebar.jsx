@@ -12,6 +12,7 @@ import {
   RiCloseLine,
   RiBox3Fill
 } from "react-icons/ri";
+import { TbCategoryFilled } from "react-icons/tb";
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -42,6 +43,14 @@ const Sidebar = () => {
                 className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors"
               >
                 <RiBox3Fill className="text-primary" /> Productos
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/categorys"
+                className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors"
+              >
+                <TbCategoryFilled className="text-primary"/> Categorias
               </Link>
             </li>
             <li>

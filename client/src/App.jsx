@@ -7,26 +7,38 @@ import AdMainDashboard from "./pages/admin/AdMain";
 import LayoutAdmin from "./layouts/LayoutAdmin";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
-import AdProducts from "./pages/admin/AdProducts";
+import AdProducts from "./pages/admin/Products/AdProducts";
 import { ProductProvider } from "./context/ProductContext";
+import { CategoryProvider } from "./context/CategoryContext";
+import NewProduct from "./pages/admin/Products/newProduct";
+import AdCategorys from "./pages/admin/Categorys/AdCategorys";
+import NewCategory from "./pages/admin/Categorys/NewCategory";
 
 function App() {
   return (
     <AuthProvider>
       <ProductProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/dashboard" element={<LayoutAdmin />}>
-                <Route index element={<AdMainDashboard />} />
-                <Route path="/dashboard/products" element={<AdProducts />} />
+        <CategoryProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/dashboard" element={<LayoutAdmin />}>
+                  <Route index element={<AdMainDashboard />} />
+                  <Route path="/dashboard/products" element={<AdProducts />} />
+                  <Route
+                    path="/dashboard/newProduct"
+                    element={<NewProduct />}
+                  />
+                  <Route path="/dashboard/categorys" element={<AdCategorys />} />
+                  <Route path="/dashboard/newCategory" element={<NewCategory />} />
+                </Route>
               </Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
+            </Routes>
+          </BrowserRouter>
+        </CategoryProvider>
       </ProductProvider>
     </AuthProvider>
   );

@@ -1,5 +1,10 @@
 import { createContext, useContext, useState } from "react";
-import { createProductRequest, deleteProductRequest, getProductsRequest } from "../api/products";
+import {
+  createProductRequest,
+  deleteProductRequest,
+  getProductsRequest,
+  updateProductRequest,
+} from "../api/products";
 
 const ProductContext = createContext();
 
@@ -34,10 +39,18 @@ export function ProductProvider({ children }) {
     }
   };
 
+  const updateProduct = async (id, product) => {
+    try {
+      await updateProductRequest(id, product);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const deleteProduct = async (id) => {
     try {
       const res = await deleteProductRequest(id);
-      window.location.reload(); 
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -49,6 +62,7 @@ export function ProductProvider({ children }) {
         createProduct,
         getProducts,
         deleteProduct,
+        updateProduct,
       }}
     >
       {children}

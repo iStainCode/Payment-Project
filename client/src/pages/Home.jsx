@@ -4,17 +4,66 @@ import { motion, useInView } from "framer-motion";
 import CardProduct from "../components/CardProduct";
 import { useProducts } from "../context/ProductContext";
 import { Link } from "react-router-dom";
+import FilterSelect from "../components/FilterSelect";
+import { createPaymentRequest } from "../api/payment";
 
 function Home() {
   const [show, setShow] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref);
 
-  const { getProducts, products } = useProducts()
+  const { getProducts, products } = useProducts();
+
+  const [cart, setCart] = useState([]);
+
+  const handleAddToCart = (product) => {
+    const { name, price } = product;
+    const newCartItem = { name, price };
+    setCart((prevCart) => {
+      return [...prevCart, newCartItem];
+    });
+  };
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
+
+  const handleFilterChange = (selectedCategory) => {
+    setFilters({
+      ...filters,
+      category: selectedCategory,
+    });
+  };
+
+  const [filters, setFilters] = useState({
+    category: "All",
+  });
+
+  const filterProducts = (products) => {
+    if (filters.category === "All") {
+      return products; // Devuelve todos los productos si la categoría es 'All'
+    } else {
+      return products.filter(
+        (product) => product.category === filters.category
+      );
+    }
+  };
 
   useEffect(() => {
     getProducts();
   }, []);
+  const filteredProducts = filterProducts(products);
+
+  async function comprar (){
+    try {
+      const res = await createPaymentRequest(cart)
+      console.log(res)
+    } catch (error) {
+      console.log(
+        error
+      )
+    }
+  }
   return (
     <>
       <div
@@ -101,9 +150,10 @@ function Home() {
                   </ul>
                 </div>
               </div>
-              <Link 
-              to='/login'
-              className="focus:outline-none lg:text-lg lg:font-bold focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 hidden md:block bg-transparent transition duration-150 ease-in-out hover:bg-gray-200 rounded border border-indigo-700 text-indigo-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">
+              <Link
+                to="/login"
+                className="focus:outline-none lg:text-lg lg:font-bold focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 hidden md:block bg-transparent transition duration-150 ease-in-out hover:bg-gray-200 rounded border border-indigo-700 text-indigo-700 px-4 sm:px-8 py-1 sm:py-3 text-sm"
+              >
                 Ingresar
               </Link>
             </div>
@@ -111,13 +161,24 @@ function Home() {
         </dh-component>
         {/* Code block ends */}
       </div>
+      <button onClick={comprar}>
+      <FilterSelect onChange={handleFilterChange} />
+        pagar
+      </button>
       <section
         id="Projects"
         className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"
       >
-
-        {products.map((product) =>(
-          <CardProduct key={product._id} name={product.name} price={product.price.$numberDecimal}/>
+        {console.log(products)}
+        {filteredProducts.map((product) => (
+          <CardProduct
+            key={product._id}
+            name={product.name.slice(0, 20) + "..."}
+            price={parseFloat(product.price.$numberDecimal)}
+            image1={product.image1}
+            image2={product.image2}
+            onAddToCart={() => handleAddToCart(product)}
+          />
         ))}
       </section>
     </>
