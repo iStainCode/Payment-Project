@@ -14,8 +14,8 @@ export const createProductRequest = async (productData) => {
   }
 };
 
-export const updateProductRequest = async (product) =>
-  axios.put(`/products/${product._id}`, product);
+export const updateProductRequest = async (id,product) =>
+  axios.put(`/products/${id}`, product);
 
 
 export const deleteProductRequest = async (id) => axios.delete(`/products/${id}`);

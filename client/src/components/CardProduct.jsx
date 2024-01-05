@@ -40,7 +40,7 @@ const CardProduct = ({ name, price, image1, image2, onAddToCart }) => {
         </a>
         <div className="mt-2 mb-5 flex items-center justify-between">
           <p>
-            <span className="text-3xl font-bold text-white">{price}</span>
+            <span className="text-3xl font-bold text-white">s/{price}</span>
             <span className="text-sm text-white line-through m-">
               {price + 50}
             </span>

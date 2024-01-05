@@ -7,7 +7,7 @@ import "@szhsin/react-menu/dist/transitions/slide.css";
 import { useProducts } from "../../../context/ProductContext";
 
 const AdProducts = () => {
-  const { getProducts, products } = useProducts();
+  const { getProducts, products, deleteProduct } = useProducts();
 
   useEffect(() => {
     getProducts();
@@ -66,7 +66,7 @@ const AdProducts = () => {
             </div>
             <div>
               <h5 className="md:hidden text-white font-bold mb-2">Nombre</h5>
-              <span>{product.name}</span>
+              <span>{product.name.slice(0, 20) + "..."}</span>
             </div>
             <div>
               <h5 className="md:hidden text-white font-bold mb-2">
@@ -109,13 +109,21 @@ const AdProducts = () => {
                 menuClassName="bg-secondary-100 p-4"
               >
                 <MenuItem className="p-0 hover:bg-transparent">
-                  <button className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 p-2 flex-1">
+                  <Link
+                    className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 p-2 flex-1"
+                    to={`/dashboard/product/${product._id}`}
+                  >
                     editar
-                  </button>
+                  </Link>
                 </MenuItem>
 
                 <MenuItem className="p-0 hover:bg-transparent">
-                  <button className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 p-2 flex-1">
+                  <button
+                    className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 p-2 flex-1"
+                    onClick={()=> {
+                      deleteProduct(product._id)
+                    }}
+                  >
                     eliminar
                   </button>
                 </MenuItem>

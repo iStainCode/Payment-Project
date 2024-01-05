@@ -74,14 +74,6 @@ export const updateProduct = async (req, res) => {
     product.category = category;
     product.active = active;
 
-    // Verifica si hay nuevas imágenes y las actualiza si es necesario
-    if (req.files["image1"]) {
-      product.image1 = req.files["image1"][0].path; // Actualiza la primera imagen
-    }
-
-    if (req.files["image2"]) {
-      product.image2 = req.files["image2"][0].path; // Actualiza la segunda imagen
-    }
 
     // Guarda el producto actualizado en la base de datos
     const updatedProduct = await product.save();

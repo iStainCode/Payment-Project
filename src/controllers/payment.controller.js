@@ -1,27 +1,58 @@
-import { MercadoPagoConfig, Payment } from "mercadopago";
+import mercadopago from "mercadopago";
 
 import { TOKEN_MERCADO_PAGO } from "../config.js";
 
 export const createOrder = async (req, res) => {
-  // Step 2: Initialize the client object
-  const client = new MercadoPagoConfig({
-    accessToken: TOKEN_MERCADO_PAGO,
-    options: { timeout: 5000, idempotencyKey: "abc" },
+  mercadopago.configure({
+    access_token: TOKEN_MERCADO_PAGO,
   });
 
-  // Step 3: Initialize the API object
-  const payment = new Payment(client);
+  const products = req.body;
 
-  // Step 4: Create the request object
-  const body = {
-    transaction_amount: 12.34,
-    description: "<DESCRIPTION>",
-    payment_method_id: "<PAYMENT_METHOD_ID>",
-    payer: {
-      email: "<EMAIL>",
+  // console.log(products);
+
+  const allProducts = products.map((product) => ({
+    title: product.name,
+    quantity: 1,
+    currency_id: "PEN",
+    unit_price: parseFloat(product.price.$numberDecimal),
+  }));
+
+  // console.log(allProducts);
+
+  const result = await mercadopago.preferences.create({
+    items: allProducts,
+    back_urls: {
+      success: "http://localhost:5173/",
+      failure: "http://localhost:5173/",
+      pending: "http://localhost:5173/pending",
     },
-  };
+    notification_url: "https://eb39-179-6-4-245.ngrok-free.app/webhook",
+  });
 
-  // Step 5: Make the request
-  payment.create({ body }).then(console.log).catch(console.log);
+  console.log(result.body);
+
+  res.status(200).json(result);
+};
+
+export const receiveWebhook = async (req, res) => {
+  console.log(req.query);
+
+  const payment = req.query;
+
+  try {
+    if (payment.type === "payment") {
+      const data = await mercadopago.payment.findById(payment["data.id"]);
+      console.log('---------------------------------')
+
+
+      console.log(data);
+    }
+
+    res.sendStatus(204);
+  } catch (error) {
+    console.log(error);
+
+    return res.sendStatus(500).json({ error: error.message });
+  }
 };

@@ -2,8 +2,11 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { createProductRequest } from "../../../api/products";
 import { useCategorys } from "../../../context/CategoryContext";
+import { useNavigate } from "react-router-dom";
 
 const NewProduct = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -37,6 +40,9 @@ const NewProduct = () => {
       const response = await createProductRequest(formattedData);
   
       console.log("Producto creado:", response);
+
+      navigate('/dashboard/products')
+      
     } catch (error) {
       console.error("Error al crear el producto XD:", error);
     }

@@ -56,6 +56,7 @@ function Home() {
 
   async function comprar (){
     try {
+      console.log(cart)
       const res = await createPaymentRequest(cart)
       console.log(res)
     } catch (error) {
@@ -162,9 +163,9 @@ function Home() {
         {/* Code block ends */}
       </div>
       <button onClick={comprar}>
-      <FilterSelect onChange={handleFilterChange} />
         pagar
       </button>
+      <FilterSelect onChange={handleFilterChange} />
       <section
         id="Projects"
         className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5"

@@ -1,10 +1,13 @@
 import axios from "./axios";
 
-export const createPaymentRequest = async (payment) => {
+export const createPaymentRequest = async (products) => {
   try {
-    const res = await axios.post('/create-order', payment)
-    console.log(res)
+    const response = await axios.post("/create-order", products);
+
+    console.log(response.data);
+
+    window.location.href = response.data.response.init_point
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};

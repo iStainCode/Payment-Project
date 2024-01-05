@@ -10,7 +10,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdProducts from "./pages/admin/Products/AdProducts";
 import { ProductProvider } from "./context/ProductContext";
 import { CategoryProvider } from "./context/CategoryContext";
-import NewProduct from "./pages/admin/Products/newProduct";
+import NewProduct from "./pages/admin/Products/NewProduct";
+import EditProducts from "./pages/admin/Products/EditProducts";
 import AdCategorys from "./pages/admin/Categorys/AdCategorys";
 import NewCategory from "./pages/admin/Categorys/NewCategory";
 
@@ -31,6 +32,10 @@ function App() {
                   <Route
                     path="/dashboard/newProduct"
                     element={<NewProduct />}
+                  />
+                  <Route
+                    path="/dashboard/product/:id"
+                    element={<EditProducts />}
                   />
                   <Route path="/dashboard/categorys" element={<AdCategorys />} />
                   <Route path="/dashboard/newCategory" element={<NewCategory />} />
