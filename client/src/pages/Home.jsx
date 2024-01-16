@@ -151,6 +151,14 @@ function Home() {
                   </ul>
                 </div>
               </div>
+              <button className="focus:outline-none lg:text-lg lg:font-bold focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 hidden md:block bg-transparent transition duration-150 ease-in-out hover:bg-gray-200 rounded border border-indigo-700 text-indigo-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">
+                  🛒
+              </button>
+              <section className="fixed bg-black p-6  mx-36">
+                {cart.map((product) => (
+                  <span>{product.name}</span>
+                ))}
+              </section>
               <Link
                 to="/login"
                 className="focus:outline-none lg:text-lg lg:font-bold focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 hidden md:block bg-transparent transition duration-150 ease-in-out hover:bg-gray-200 rounded border border-indigo-700 text-indigo-700 px-4 sm:px-8 py-1 sm:py-3 text-sm"
