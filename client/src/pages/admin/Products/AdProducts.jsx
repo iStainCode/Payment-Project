@@ -113,7 +113,7 @@ const AdProducts = () => {
                     className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 p-2 flex-1"
                     to={`/dashboard/product/${product._id}`}
                   >
-                    editar
+                    Editar
                   </Link>
                 </MenuItem>
 
@@ -124,7 +124,7 @@ const AdProducts = () => {
                       deleteProduct(product._id)
                     }}
                   >
-                    eliminar
+                    Eliminar
                   </button>
                 </MenuItem>
               </Menu>

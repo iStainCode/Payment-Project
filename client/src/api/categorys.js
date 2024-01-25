@@ -1,6 +1,7 @@
 import axios from "./axios";
 
-export const getCategorysRequest = async () => axios.get("/categorys");
+export const getCategorysRequest = async () => 
+axios.get("/categorys");
 
 export const createCategoryRequest = async (category) =>
   axios.post("/categorys", category);

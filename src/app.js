@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import debtsRoutes from "./routes/debts.routes.js";
 import productsRouter from "./routes/products.routes.js";
 import categorysRouter from "./routes/category.routes.js";
+import usersRouter from "./routes/users.routes.js";
 import paymentRoutes from './routes/payment.routes.js'
 
 
@@ -32,6 +33,8 @@ app.use("/api", debtsRoutes);
 app.use("/api", productsRouter);
 //las rutas de categorias
 app.use("/api", categorysRouter);
+//las rutas de usuario
+app.use("/api", usersRouter);
 //ruta de payment
 app.use('/api',paymentRoutes)
 

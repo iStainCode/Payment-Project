@@ -53,6 +53,8 @@ const EditProducts = ({}) => {
       const response = await updateProduct(params.id, formattedData);
 
       console.log("Producto creado:", response);
+      navigate('/dashboard/products')
+      
     } catch (error) {
       console.error("Error al crear el producto XD:", error);
     }

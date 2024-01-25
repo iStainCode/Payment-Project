@@ -52,7 +52,9 @@ export function CategoryProvider({ children }) {
   const deleteCategory = async (id) => {
     try {
       const res = await deleteCategoryRequest(id);
-      window.location.reload();
+      if (res.status === 204)
+      setCategorys(categorys.filter(category => category._id !== id));
+    window.location.reload()
     } catch (error) {
       console.log(error);
     }
