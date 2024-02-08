@@ -7,6 +7,7 @@ import {
   getUserRequest
 } from "../api/Users";
 import bcrypt from 'bcryptjs';
+import Swal from 'sweetalert2'
 
 const UserContext = createContext();
 
@@ -34,10 +35,16 @@ export function UserProvider({ children }) {
 
   const createUser = async (user) => {
     try {
-
       const hashedPassword = await bcrypt.hash(user.password, 10);
       const res = await createUserRequest({ ...user, password: hashedPassword });
       console.log(res.data);
+      Swal.fire({
+        position: "bottom-end",
+        icon: "success",
+        title: "Registro exitoso",
+        showConfirmButton: false,
+        timer: 1000
+      });
     } catch (error) {
       console.log(error);
     }
@@ -49,8 +56,14 @@ export function UserProvider({ children }) {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         user.password = hashedPassword;
       }
-
       await updateUserRequest(id, user);
+      Swal.fire({
+        position: "bottom-end",
+        icon: "success",
+        title: "Datos Actualizados con exito",
+        showConfirmButton: false,
+        timer: 1000
+      });
     } catch (error) {
       console.log(error);
     }

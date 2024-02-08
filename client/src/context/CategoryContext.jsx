@@ -1,10 +1,11 @@
 import { createContext, useContext, useState } from "react";
 import {
   createCategoryRequest,
-  getCategorysRequest,
   deleteCategoryRequest,
+  getCategorysRequest, 
   updateCategoryRequest,
 } from "../api/categorys";
+import Swal from 'sweetalert2'
 
 const CategoryContext = createContext();
 
@@ -36,14 +37,13 @@ export function CategoryProvider({ children }) {
     try {
       const res = await createCategoryRequest(category);
       console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updateCategory = async (id, category) => {
-    try {
-      await updateCategoryRequest(id, category);
+      Swal.fire({
+        position: "bottom-end",
+        icon: "success",
+        title: "Registro exitoso",
+        showConfirmButton: false,
+        timer: 1000
+      });
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +66,6 @@ export function CategoryProvider({ children }) {
         categorys,
         createCategory,
         getCategorys,
-        updateCategory,
         deleteCategory,
       }}
     >

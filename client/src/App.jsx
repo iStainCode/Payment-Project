@@ -47,7 +47,6 @@ function App() {
                   <Route path="/dashboard/users" element={<AdUsers />} />
                   <Route path="/dashboard/newUser" element={<NewUser />} />
                   <Route path="/dashboard/user/:id" element={<EditUsers />} />
-
                 </Route>
               </Route>
             </Routes>

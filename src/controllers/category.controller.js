@@ -19,24 +19,23 @@ export const createCategory = async (req, res) => {
 
 export const deleteCategory = async (req, res) => {
   const category = await categoryModel.findByIdAndDelete(req.params.id);
-
   if (!category)
-    return res.status(404).json({ message: "categoria no encontrada" });
-
+    return res.status(404).json({ message: "Categoria no encontrada" });
   res.json(category);
 };
 
 export const updataCategory = async (req, res) => {
-  const category = await categoryModel.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    {
-      new: true,
-    }
-  );
+  try { 
+    const { category } = req.body;
+    const categor = await categoryModel.findById(req.params.id);
 
-  if (!category)
+    if (!categor){ 
     return res.status(404).json({ message: "categoria no encontrada" });
-
-  res.json(category);
+    }
+    category.category = category;
+    const updateCategory = await category.save();
+    res.json(updateCategory);
+  } catch(error) {
+    res.status(500).json({ message: "Error al actualizar la categoria"})
+  }
 };

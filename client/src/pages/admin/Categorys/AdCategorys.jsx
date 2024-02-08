@@ -72,18 +72,15 @@ const AdCategorys = () => {
                 transition
                 menuClassName="bg-secondary-100 p-4"
               >
+                
                 <MenuItem className="p-0 hover:bg-transparent">
-                  <button className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 p-2 flex-1">
-                    editar
-                  </button>
-                </MenuItem>
-
-                <MenuItem className="p-0 hover:bg-transparent">
-                  <button className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 p-2 flex-1"
-                  onClick={()=> {
-                    deleteCategory(category._id)
-                  }}>
-                    eliminar
+                <button
+                    className="rounded-lg transition-colors text-gray-300 hover:bg-secondary-900 flex items-center gap-x-4 p-2 flex-1"
+                    onClick={()=> {
+                      deleteCategory(category._id)
+                    }}
+                  >
+                    Eliminar
                   </button>
                 </MenuItem>
               </Menu>

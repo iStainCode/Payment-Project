@@ -4,7 +4,6 @@ import {
   getCategorys,
   createCategory,
   deleteCategory,
-  updataCategory,
 } from "../controllers/category.controller.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { createCategorySchema } from "../schemas/category.schema.js";
@@ -20,8 +19,6 @@ router.post(
   createCategory
 );
 
-router.delete("/categorys", authRequired, deleteCategory);
-
-router.put("/categorys", authRequired, updataCategory);
+router.delete("/categorys/:id", authRequired, deleteCategory);
 
 export default router;

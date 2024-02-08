@@ -6,6 +6,7 @@ import {
   updateProductRequest,
   getProductRequest
 } from "../api/products";
+import Swal from 'sweetalert2'
 
 const ProductContext = createContext();
 
@@ -35,6 +36,13 @@ export function ProductProvider({ children }) {
     try {
       const res = await createProductRequest(product);
       console.log(res.data);
+      Swal.fire({
+        position: "bottom-end",
+        icon: "success",
+        title: "Registro exitoso",
+        showConfirmButton: false,
+        timer: 1000
+      });
     } catch (error) {
       console.log(error);
     }
@@ -43,6 +51,13 @@ export function ProductProvider({ children }) {
   const updateProduct = async (id, product) => {
     try {
       await updateProductRequest(id, product);
+      Swal.fire({
+        position: "bottom-end",
+        icon: "success",
+        title: "Datos Actualizados con exito",
+        showConfirmButton: false,
+        timer: 1000
+      });
     } catch (error) {
       console.log(error);
     }

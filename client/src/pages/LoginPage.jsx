@@ -21,7 +21,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/dashboard");
+    if (isAuthenticated) navigate("/dashboard/products");
   }, [isAuthenticated]);
 
   const onSubmit = handleSubmit((data) => {
